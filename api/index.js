@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import routes from './routes/userroutes.js'
 import cookieParser from 'cookie-parser';
 import authroute from './routes/authroute.js'
+import path from 'path'
 dotenv.config();
 mongoose.connect(`mongodb://127.0.0.1:27017/`,{
     useUnifiedTopology: true, useNewUrlParser: true
@@ -12,7 +13,13 @@ mongoose.connect(`mongodb://127.0.0.1:27017/`,{
 }).catch((err)=>{
     console.log(err);
 });
+const __dirname=path.resolve();
 const app=express();
+
+app.use(express.static(path.join(__dirname,'/client/dist')))
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','dist','index.html'));
+})
 
 app.use(express.json());
 app.use(cookieParser());
