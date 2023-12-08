@@ -25,11 +25,12 @@ const handlesubmit=async(e)=>{
     body: JSON.stringify(formData),
   });
   const data=await res.json();
+  console.log(formData);
   setLoading(false);
   if(data.success===false)
  { setError(true);
   return;}
-  navigate('/signin');
+  navigate('/signin'); 
 
 }catch(e){
 setLoading(false);

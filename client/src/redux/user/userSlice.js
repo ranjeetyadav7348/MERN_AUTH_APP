@@ -4,6 +4,8 @@ const initialState = {
     currentUser: null,
     loading: false,
     error: false,
+    val:null,
+    PasswordReset:null
   };
   
 const userSlice=createSlice({
@@ -52,7 +54,28 @@ const userSlice=createSlice({
             state.loading=false;
             state.error=false;
           },
+          otpData:(state,action)=>{
+            state.val=action.payload
+          },
+          PasswordResetStart:(state)=>{
+             state.loading=true,
+             state.error=false
+          },
+          PasswordResetProcess:(state,action)=>{
+            state.val=action.payload,
+             state.loading=true,
+             state.error=false
+          },
+          PasswordResetFailure:(state)=>{
+            state.error=true;
+            state.loading=false
+          },
+          PasswordResetSuccess:(state)=>{
+            state.error=false;
+            state.loading=false
+          }
+        
     }
 });
-export const{SignOut,deleteUserFailure,deleteUserSuccess,deleteUserStart,signInFailure,signInStart,signInSuccess,updateUserFailure,updateUserSuccess,updateUserStart}=userSlice.actions;
+export const{PasswordResetSuccess,PasswordResetStart,PasswordResetFailure,otpData,SignOut,PasswordResetProcess,deleteUserFailure,deleteUserSuccess,deleteUserStart,signInFailure,signInStart,signInSuccess,updateUserFailure,updateUserSuccess,updateUserStart}=userSlice.actions;
 export default userSlice.reducer;
