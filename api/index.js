@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import authroute from './routes/authroute.js'
 import path from 'path'
 dotenv.config();
-mongoose.connect(`mongodb://127.0.0.1:27017/`,{
+mongoose.connect(`mongodb+srv://yadavranjeet060:yadavranjeet060@auth.phbzaiv.mongodb.net/?retryWrites=true&w=majority`,{
     useUnifiedTopology: true, useNewUrlParser: true
   }).then(()=>{
     console.log(`connected to DB`);
