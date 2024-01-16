@@ -5,6 +5,7 @@ import routes from './routes/userroutes.js'
 import cookieParser from 'cookie-parser';
 import authroute from './routes/authroute.js'
 import path from 'path'
+
 dotenv.config();
 mongoose.connect(`mongodb+srv://yadavranjeet060:yadavranjeet060@auth.phbzaiv.mongodb.net/?retryWrites=true&w=majority`,{
     useUnifiedTopology: true, useNewUrlParser: true
@@ -23,6 +24,9 @@ app.get('*',(req,res)=>{
 
 app.use(express.json());
 app.use(cookieParser());
+
+
+
 
 
 app.use('/api/user',routes);

@@ -18,33 +18,6 @@ export default function ForgotPassword() {
   const [myUse,setMyuse]=useState("");
   const[value1,setValue]=useState("");
 
-  // const handlesubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     setError(false);
-  //     const res = await fetch('/api/auth/forgotpassword/send', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     const data = await res.json();
-  //     console.log(data);
-
-  //     if (data.success === false) {
-  //       console.log("Validation failed");
-  //       return;
-  //     }
-
-  //     navigate('/signin');
-  //   } catch (error) {
-  //     console.error(error);
-  //     setError(true);
-  //   }
-  // }
 
   //Make sure to check your browser console for any error messages, and that should help you identify the issue. If the problem persists, you may want to provide more information about any error messages you receive or any specific behavior you observe.
 
@@ -85,7 +58,7 @@ export default function ForgotPassword() {
   if( value1==='' )
   setEmpty(true);
 
-  console.log("virat is here");
+ 
     axios.post('/api/auth/forgotpassword/send', formData)
     .then(res => {
       // Handle successful response
@@ -102,21 +75,7 @@ export default function ForgotPassword() {
     });
 
 
-    //   const data= res.json();
-    //   console.log(data);
-    //   console.log("after data code runs");
-    //   //setLoading(false);
-    //   if(data.success===false)
-    //  { //setError(true);
-    //   console.log("validation falied")
-    //   return;}
     
-
-    // }catch(e){
-    // //setLoading(false);
-    
-    // }
-    //console.log(data); 
     
   }
 

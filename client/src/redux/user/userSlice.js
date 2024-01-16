@@ -5,7 +5,10 @@ const initialState = {
     loading: false,
     error: false,
     val:null,
-    PasswordReset:null
+    PasswordReset:null,
+    post:null,
+    // QueryRes:false,
+    // alluser:null
   };
   
 const userSlice=createSlice({
@@ -19,6 +22,7 @@ const userSlice=createSlice({
             state.currentUser=action.payload,
             state.loading=false;
             state.error=false;
+            
         },
         signInFailure:(state,action)=>{
          
@@ -38,7 +42,7 @@ const userSlice=createSlice({
             state.error=action.payload;
          },
          deleteUserStart: (state) => {
-            state.loading = true;
+            state.loading = false;
           },
           deleteUserSuccess: (state) => {
             state.currentUser = null;
@@ -73,9 +77,26 @@ const userSlice=createSlice({
           PasswordResetSuccess:(state)=>{
             state.error=false;
             state.loading=false
-          }
+          },
+          QuerytStart:(state)=>{
+            state.loading=true,
+            state.error=false
+         },
+          QueryResponse:(state,action)=>{
+            state.QueryRes=action.payload
+            state.loading=false,
+            state.error=false
+             
+          },
+          QuerytFailure:(state)=>{
+            state.loading=false,
+            state.error=true
+         },
+         postDetails:(state,action)=>{
+          state.post=action.payload
+         }
         
     }
 });
-export const{PasswordResetSuccess,PasswordResetStart,PasswordResetFailure,otpData,SignOut,PasswordResetProcess,deleteUserFailure,deleteUserSuccess,deleteUserStart,signInFailure,signInStart,signInSuccess,updateUserFailure,updateUserSuccess,updateUserStart}=userSlice.actions;
+export const{postDetails,QuerytFailure,QuerytStart, QueryResponse,PasswordResetSuccess,PasswordResetStart,PasswordResetFailure,otpData,SignOut,PasswordResetProcess,deleteUserFailure,deleteUserSuccess,deleteUserStart,signInFailure,signInStart,signInSuccess,updateUserFailure,updateUserSuccess,updateUserStart}=userSlice.actions;
 export default userSlice.reducer;

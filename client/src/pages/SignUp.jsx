@@ -23,14 +23,16 @@ const handlesubmit=async(e)=>{
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(formData),
+   
   });
   const data=await res.json();
   console.log(formData);
-  setLoading(false);
+ 
   if(data.success===false)
  { setError(true);
   return;}
   navigate('/signin'); 
+  setLoading(false);
 
 }catch(e){
 setLoading(false);

@@ -8,9 +8,12 @@ export const verifyToken = (req,res,next)=> {
   return res.status(401).json(errorHandler(401,'Access denied'));
 
   jwt.verify(token,process.env.JWT_SECRET,(err,user)=>{
+    
     if(err)
     return res.status(403).json("token is not valid");
-req.user=user;
+    req.user=user; 
+   
+   
 next();
   })
 

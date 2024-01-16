@@ -1,47 +1,56 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { PasswordResetProcess, PasswordResetFailure, PasswordResetStart, PasswordResetSuccess } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 
 
 
-export default function PasswordReset() {
+export default function Getalluser() {
  // const [newPassword, setNewPassword] = useState({});
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const[checkError,setError1]=useState(false);
   const { loading, error } = useSelector((e) => e.user);
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
 
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-        console.log(formData.password);
-      if (formData.password === formData.password1) {
-       // console.log("le bhai")
-        dispatch(PasswordResetStart());
-       axios.post('/api/auth/forgotpassword/passwordRest/setpassword', formData)
-         .then(res => {
-          //  Handle successful response
-         // console.log("virat");
-          dispatch(PasswordResetProcess(formData.password));
-           // navigate('/forgotpassword/send'); 
-         })
-         .catch (err=> {
-           console.log("galat hai ye")
-         setError1(true);
-          })
-     
-        }
-      else
-      {
-        return dispatch(PasswordResetFailure());
+  useEffect(() => {
+    // Code to load something (e.g., fetch data from an API)
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.example.com/data');
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
+    };
 
-  }
+    // Call the fetchData function when the component mounts
+    fetchData();
+
+    // Cleanup function (optional): If you need to perform cleanup when the component unmounts
+    return () => {
+      // Cleanup code here (e.g., clearing subscriptions, timers, etc.)
+    };
+  }, []);
+
+
+     
+      //  axios.get('/api/auth/admin')
+      //    .then(res => {
+      //     //  Handle successful response
+      //    // console.log("virat");
+      //     dispatch(userAllDetail(res.user));
+      //      // navigate('/forgotpassword/send'); 
+      //    })
+      //    .catch (err=> {
+      //      console.log("galat hai ye")
+      //    setError1(true);
+      //     })
+     
+      //   }
+  
+ 
 
   return (
     <div className='p-3 max-w-lg mx-auto'>
@@ -54,25 +63,25 @@ export default function PasswordReset() {
           placeholder='Enter Your Email'
           id='email'
           className='bg-slate-100 p-3 rounded-lg'
-          onChange={handleChange}
+        
         />
         <input
           type='password'
           placeholder='Enter New Password'
           id='password'
           className='bg-slate-100 p-3 rounded-lg'
-          onChange={handleChange}
+        
         />
         <input
           type='password'
           placeholder='Confirm Password'
           id='password1'
           className='bg-slate-100 p-3 rounded-lg'
-          onChange={handleChange}
+        
         />
         <button
           //  disabled={loading}
-          onClick={handleSubmit}
+        
           className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
         >
          

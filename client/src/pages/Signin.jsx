@@ -70,7 +70,7 @@ export default function SignIn() {
         <OAuth />
       </form>
       <div className='flex gap-2 mt-5'>
-        <p>Dont Have an account?</p>
+        <p>Don't Have an account?</p>
         <Link to='/forgotpassword'>
         <span className='text-blue-500 '>Forgot password</span>
         </Link>

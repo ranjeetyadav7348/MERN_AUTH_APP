@@ -1,22 +1,27 @@
 import User from "../model/usermodel.js";
 
 import bcryptjs from 'bcryptjs';
-
+import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken'
+import OpenAI from "openai";
 
 import { errorHandler } from "../utils/error.js";
 import { sendMail } from "./Mail.js";
+import { Schema } from "mongoose";
 
+
+dotenv.config();
 
 export const  signup =async(req,res,next)=>{
     const {username,email,password} =req.body;
-    console.log(req.body);
+  //  console.log(req.body);
     const hashedpassword=bcryptjs.hashSync(password,10);
     const newUser=new User({username,email,password:hashedpassword});
   
    try{ await newUser.save()
      res.status(201).json({message:"user created success"});
    }catch(error){
+   
     next(error);
    }
     
@@ -156,3 +161,96 @@ export const google = async (req, res, next) => {
 export const signout=(req,res)=>{
   res.clearCookie('access_token').status(200).json('SiginOut success');
 }
+
+
+
+
+export  const Chatgpt=async(req,res)=>{
+  try{
+   
+    const openai = new OpenAI({
+      apiKey:`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`,
+    });
+    const {text}=req.body;
+     
+    const schema={
+      type:"object",
+      properties:{
+        Summary:{
+          type:"string",
+          description:"summerize the this content into 3-4 efficient line"
+        }
+      },
+      required:["Summery"]
+    }
+
+    
+    const response = await openai.chat.completions.create({
+      
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          "role": "assistant",
+          "content":`${text}`
+        }
+      ],
+      functions:[
+         {  name: "detail",
+            "parameters":schema
+
+        }
+      ],
+      function_call:{name:"detail"},
+      temperature: 0,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+
+    res.status(200).json(response.choices[0].message.function_call.arguments);
+  }
+  catch{
+    res.status(500).json("chatgpt not run")
+  }
+}
+
+
+export const getallPosts = async (req, res, next) => {
+  try {
+    // Destructuring the values from req.body
+    const { postText } = req.body;
+    const email = req.body.currentUser.email;
+
+    // Finding a user based on the email obtained from the request body
+    const validUser = await User.findOne({ email });
+    // console.log(validUser)
+
+    // Updating the user's document in the database
+    const posted = await User.findByIdAndUpdate(
+      validUser._id,
+      {
+        $set: {
+          post: postText,
+        },
+      },
+      { new: true }
+    );
+
+
+    const value=await User.find();
+    // Destructuring the post property from the updatedUser object
+    // const { post, ...rest } = posted._doc;
+
+    // Sending the response with the user details (excluding the post property)
+    const responseData = value.map(item => item.post);
+    // console.log(responseData);
+    res.status(200).json(responseData);
+  } catch (error) {
+    // Handling any errors that might occur during the process
+    next(error);
+  }
+};
+
+
+

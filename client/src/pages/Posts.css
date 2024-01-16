@@ -1,0 +1,133 @@
+.App {
+    max-width: 600px;
+    margin: auto;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    padding: 20px;
+    height: 100vh;
+    font-family: "Arial", sans-serif;
+  }
+
+  .App h1
+  {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 3%;
+    color: rgba(0, 0, 0, 0.753);
+text-shadow: 2px 4px 4px rgba(0,0,0,0.2),
+                 0px -5px 10px rgba(255,255,255,0.15);
+  }
+  
+
+
+  /* Style for the form */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Style for the textarea */
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+  }
+  
+  /* Style for the button */
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+   
+    font-weight: bolder !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   
+   
+  }
+  
+  button:hover {
+    background-color: #45a049;
+    color: azure;
+  }
+  
+
+
+
+
+   /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.posts::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .posts::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  .posts {
+    max-height: 700px;
+    overflow: scroll;
+    overflow-y: auto;
+    text-align: left;
+  }
+  
+  
+  h1 {
+    color: #333;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    
+    resize: none; /* Disable textarea resizing */
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  
+  
+  .post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .user h1{
+    font-size: medium;
+   
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  .post:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
